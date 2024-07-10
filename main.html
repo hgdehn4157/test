@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>암호 입력</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+        <script>
+            const encryptedPassword =
+                "b60d9d0575c34285a02a018bc5cca7212d9fcf6ef9dc72dc3108801bf50c8397";
+
+            function checkPassword() {
+                const userInput =
+                    document.getElementById("passwordInput").value;
+                const userHashedInput = CryptoJS.SHA256(userInput).toString();
+
+                if (userHashedInput === encryptedPassword) {
+                    window.location.href = "page1.html";
+                } else {
+                    alert("잘못된 암호입니다.");
+                }
+            }
+
+            function handleKeyPress(event) {
+                if (event.key === "Enter") {
+                    checkPassword();
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", () => {
+                document
+                    .getElementById("passwordInput")
+                    .addEventListener("keypress", handleKeyPress);
+            });
+        </script>
+    </head>
+    <body>
+        <h4>암호를 입력하세요</h4>
+        <input type="password" id="passwordInput" placeholder="암호 입력" />
+        <button onclick="checkPassword()">확인</button>
+    </body>
+</html>
